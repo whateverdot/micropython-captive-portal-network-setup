@@ -25,6 +25,7 @@ def connection(network_name, network_password):
 				return False
 				break
 	print('Network Config:', station.ifconfig())
+
 	return True
 
 
@@ -69,6 +70,8 @@ def captive_portal(essid_name):
 		if con is True:
 			existing_config = True
 			print("Network connected")
+			ap = network.WLAN(network.AP_IF)
+			ap.active(False)    # turn off AP SSID
 		else:
 			existing_config = False
 			print("Incorrect network configuration")
@@ -134,9 +137,11 @@ def captive_portal(essid_name):
 						set_connection = True
 
 
+
 			except:
 				print("Timeout")
 			time.sleep_ms(1000)
+
 		udps.close()
 
 
